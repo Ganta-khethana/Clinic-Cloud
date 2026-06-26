@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Doc Checker</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f9fafb; color: #233; margin: 0; }
+    header { background: #1863b3; color: #fff; padding: 32px 0; text-align: center; }
+    main { max-width: 700px; margin: 40px auto; background: #fff; border-radius: 16px; box-shadow: 0 4px 20px #1863b324; padding: 40px; }
+    h2 { color: #1863b3; }
+    .section { margin: 36px 0; }
+    ul { padding-left: 20px; }
+    .cta-btn { background: #1863b3; color: #fff; border: none; border-radius: 6px; padding: 12px 28px; font-size: 1.2em; margin-top: 32px; cursor: pointer; text-decoration: none; display:inline-block;}
+    .cta-btn:hover { background: #124b85; }
+    #upload-docs { padding: 24px; background: #eef6fc; margin-top: 36px; border-radius: 10px; }
+    input[type="file"] { margin: 12px 0; }
+    #results { background: #d9ffd9; padding: 20px; border-radius: 8px; margin-top: 18px; display: none; }
+    #results ul { color: #155724; }
+    @media (max-width: 500px) { main { padding: 20px } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Smart Doc Checker</h1>
+    <p>Automatically flag contradictions in your important documents!</p>
+  </header>
+  <main>
+    <section class="section">
+      <h2>Problem Statement</h2>
+      <p>
+        Organizations and institutions keep lots of rules, contracts, policies, and guidelines. Over time, contradictions creep in—creating confusion, disputes, or costly errors.
+        <br><b>Examples:</b>
+      </p>
+      <ul>
+        <li>One doc says ‘Submit by 10 PM’, another says ‘midnight’.</li>
+        <li>Handbook says ‘2 weeks’ notice’, contract says ‘1 month’.</li>
+        <li>Policy pages and circulars go out of sync as new updates arrive.</li>
+      </ul>
+      <p>
+        Manual checking is <b>tedious and error-prone</b>—leading to avoidable mistakes.
+      </p>
+    </section>
+    <section class="section">
+      <h2>Our Solution</h2>
+      <ul>
+        <li>Upload your documents and let AI scan for contradictions.</li>
+        <li>Clear explanations, reports, and suggestions for resolving conflicts.</li>
+        <li>Live monitoring of external policy pages for new updates.</li>
+        <li>Usage-based billing for transparency and control.</li>
+      </ul>
+      <a class="cta-btn" href="#upload-docs">Try the Smart Doc Checker</a>
+    </section>
+    <section class="section">
+      <h2>Features</h2>
+      <ul>
+        <li>Multi-file upload portal</li>
+        <li>AI conflict & contradiction detection</li>
+        <li>Auto-generated, downloadable reports</li>
+        <li>Usage and billing counters</li>
+        <li>External policy web page monitoring</li>
+      </ul>
+    </section>
+    <section id="upload-docs" class="section">
+      <h2>Upload Your Documents</h2>
+      <form id="docForm">
+        <input id="filesInput" type="file" multiple accept=".pdf,.doc,.docx,.txt" />
+        <br />
+        <button class="cta-btn" type="submit">
+          Check for Contradictions
+        </button>
+      </form>
+      <div id="results">
+        <h3>Contradictions Found:</h3>
+        <ul id="conflictList"></ul>
+      </div>
+    </section>
+  </main>
+  <script>
+    document.getElementById('docForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const files = document.getElementById('filesInput').files;
+      const conflictList = document.getElementById('conflictList');
+      const resultsDiv = document.getElementById('results');
+
+      // Clear previous
+      conflictList.innerHTML = "";
+
+      if (files.length < 2) {
+        conflictList.innerHTML = "<li>Please upload at least 2 documents to check for contradictions.</li>";
+        resultsDiv.style.display = "block";
+        return;
+      }
+
+      // Mock finding a contradiction (replace with real logic if backend/API available)
+      const docA = files[0].name;
+      const docB = files[1].name;
+      conflictList.innerHTML = `
+        <li><b>${docA}</b> vs <b>${docB}</b>: Submission time differs (10 PM vs midnight)</li>
+        <li><b>${docA}</b> vs <b>${docB}</b>: Attendance requirement (75% vs 65%)</li>
+        <li><b>${docA}</b> vs <b>${docB}</b>: Notice period (2 weeks vs 1 month)</li>
+      `;
+      resultsDiv.style.display = "block";
+    });
+  </script>
+</body>
+</html>
